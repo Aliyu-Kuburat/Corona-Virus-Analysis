@@ -7,6 +7,7 @@
 The coronavirus pandemic has profoundly impacted public health, necessitating the urgent need for data-driven insights to understand the virus's spread. As a data analyst, your task is to analyze a COVID-19 dataset to extract meaningful insights and present your findings.
 
 ### Dataset:
+
 **Description of some of the columns in the dataset based on importance:**
 **Province:** Geographic subdivision within a country/region.
 **Country/Region:** Geographic entity where data is recorded.
