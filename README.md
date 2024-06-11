@@ -185,7 +185,7 @@ GROUP BY
     YEAR(Date), MONTH(Date), month_name;
     ```
     -- Alternative query to show Month Name
-    ```sql
+    ```SQL
     SELECT
   YEAR(Date) AS year,
   MONTH(Date) AS month,
@@ -198,7 +198,7 @@ GROUP BY YEAR(Date), MONTH(Date), month_name;
 ```
 11. Check how corona virus spread out concerning confirmed case
 (E.g.: total confirmed cases, their average, variance & STDEV)
-```sql  
+```SQL  
 SELECT COUNT (*) AS total_confirmed_cases,
 AVG (confirmed) AS average_confirmed_cases,
 VARIANCE (confirmed) AS variance_confirmed_cases,
@@ -207,7 +207,7 @@ FROM corona_virus. `corona virus`;
  ```
 -- Q12. Check how corona virus spreads out concerning death cases per month
 -- (E.g.: total confirmed cases, their average, variance & STDEV)
-```sql
+```SQL
 SELECT YEAR (date) AS year,
        MONTH (date) AS month,
        SUM (deaths) AS total_death_cases,
@@ -220,7 +220,7 @@ GROUP BY YEAR (date), MONTH (date);
 
 13. Check how corona virus spread out with respect to recovered case
 -- (E.g.: total confirmed cases, their average, variance & STDEV)
-```sql
+```SQL
 SELECT COUNT (*) AS total_recovered_cases,
 AVG (recovered) AS average_recovered_cases,
 VARIANCE (recovered) AS variance_recovered_cases,
@@ -228,8 +228,8 @@ STDDEV (recovered) AS stdev_recovered_cases
 FROM corona_virus. `corona virus`
 WHERE recovered > 0;
  ```
-14. Find Country having highest number of the Confirmed case
-```sql
+14. Find the Country having the highest number of the Confirmed case
+```SQL
 SELECT `Country/Region`, `Province`
 FROM corona_virus. `corona virus`
 WHERE confirmed = (
@@ -238,25 +238,25 @@ WHERE confirmed = (
 );
  ```
 --A check Query 
-```sql
+```SQL
 Select max (Confirmed) FROM corona_virus. `corona virus`
 WHERE `Country/Region`= 'Turkey';
 ```
  
-15. Find Country having lowest number of the death case
-
-SELECT DISTINCT (`Country/Region`), Deaths
+15. Find the Country having the lowest number of the death case
+```SQL
+SELECT DISTINCT (`Country/Region), Deaths
 FROM corona_virus. `corona virus`
 WHERE deaths = (
     SELECT MIN (deaths)
     FROM corona_virus. `corona virus`
 );
-     
--- Q16. Find top 5 countries having highest recovered case
-
+```     
+-- Q16. Find the top 5 countries having the highest recovered case
+```SQL
 SELECT `Country/Region`, recovered
 FROM corona_virus. `corona virus`
 ORDER BY recovered DESC
 LIMIT 5;
- 
+```
 
