@@ -4,9 +4,7 @@
 
 ### Statement Problem
 
-The coronavirus pandemic has had a significant impact on public health and has created an urgent
-need for data-driven insights to understand the spread of the virus. As a data analyst, you have been
-tasked with analyzing a CORONA VIRUS dataset to derive meaningful insights and present your findings.
+The coronavirus pandemic has profoundly impacted public health, necessitating the urgent need for data-driven insights to understand the virus's spread. As a data analyst, your task is to analyze a COVID-19 dataset to extract meaningful insights and present your findings.
 
 ### Dataset:
 **Description of some of the columns in the dataset based on importance:**
@@ -39,39 +37,49 @@ SELECT * FROM corona_virus. `corona virus`;
 ```
 
 1.	Write a code to check NULL values
+```sql
 SELECT * FROM corona_virus. `corona virus`
 WHERE Province IS NULL;
-
+```
+Or 
+```sql
 SELECT * FROM corona_virus. `corona virus`
 WHERE COALESCE (Longitude, '') = '';
+```
  
 2.	If NULL values are present, update them with zeros for all columns. 
        There was no null value present in the data
+
 3.	 Check total number of rows
- 
+ ```sql
  SELECT COUNT (*) AS total_rows
 FROM corona_virus. `corona virus`;
- 
-
+```
+```sql
 ALTER TABLE corona_virus.`corona virus`
 MODIFY Date date;
+```
 Needed to modify the date column to a date data type
-I check if it was properly updated by this query: 
+I checked if it was properly updated by this query: 
+```sql
 DESCRIBE corona_virus. `corona virus`;
+```
+```sql
 SHOW COLUMNS FROM corona_virus. `corona virus`;
+```
  
 4.	 Check what is start_date and end_date
-
+```sql
 SELECT MIN(Date) AS Start_date, MAX(Date) AS end_date
 FROM corona_virus. `corona virus`;
- 
-
-5.	Number of months present in dataset
+```
+5.	Number of months present in the dataset
+```sql
 SELECT COUNT (DISTINCT MONTH(Date)) AS num_months
 FROM corona_virus. `corona virus`;
- 
-6.	Find monthly average for confirmed, deaths, recovered
-
+```
+7.	Find a monthly average for confirmed, deaths, recovered
+```sql
 SELECT YEAR (date) AS year,
        MONTH (date) AS month,
        AVG (confirmed) AS avg_confirmed,
@@ -80,9 +88,9 @@ SELECT YEAR (date) AS year,
 FROM corona_virus. `corona virus`
 GROUP BY YEAR (date), MONTH (date)
 ORDER BY YEAR (date), MONTH (date);
-
- 
-7.	 Find most frequent value for confirmed, deaths, recovered each month 
+```
+7.	 Find the most frequent value for confirmed, deaths, recovered each month 
+```sql
 SELECT
   YEAR('date') AS year,
   MONTH('date') AS month,
@@ -109,8 +117,9 @@ FROM (
 ) AS monthly_data
 WHERE
   rn_confirmed = 1 AND rn_deaths = 1 AND rn_recovered = 1;
- 
+ ```
 8.	 Find minimum values for confirmed, deaths, recovered per year
+```sql
 SELECT 
     YEAR(Date) AS year,
     MIN (confirmed) AS min_confirmed,
@@ -120,9 +129,10 @@ FROM
     corona_virus. `corona virus`
 GROUP BY 
     YEAR(Date);
- 
+ ```
     
 9.	Find maximum values of confirmed, deaths, recovered per year
+```sql
 SELECT 
     YEAR(Date) AS year,
     MAX (confirmed) AS max_confirmed,
@@ -132,10 +142,9 @@ FROM
     corona_virus. `corona virus`
 GROUP BY 
     YEAR(Date);
- 
-    
+ ```
 10.	The total number of cases of confirmed, deaths, recovered each month
-    
+```sql
    SELECT 
     YEAR(Date) AS year,
     MONTH(Date) AS month,
@@ -146,9 +155,9 @@ FROM
     corona_virus. `corona virus`
 GROUP BY 
     YEAR(Date), MONTH(Date);
- 
-
--- A query to show month Name
+ ```
+-- A query to show month's Name
+```sql
 SELECT 
     YEAR(Date) AS year,
     MONTH(Date) AS month,
@@ -174,9 +183,9 @@ FROM
     corona_virus. `corona virus`
 GROUP BY 
     YEAR(Date), MONTH(Date), month_name;
-    
+    ```
     -- Alternative query to show Month Name
-    
+    ```sql
     SELECT
   YEAR(Date) AS year,
   MONTH(Date) AS month,
@@ -186,20 +195,19 @@ GROUP BY
   DATE_FORMAT (Date, '%M') AS month_name
 FROM corona_virus. `corona virus`
 GROUP BY YEAR(Date), MONTH(Date), month_name;
-
- 
-11. Check how corona virus spread out with respect to confirmed case
+```
+11. Check how corona virus spread out concerning confirmed case
 (E.g.: total confirmed cases, their average, variance & STDEV)
-    
+```sql  
 SELECT COUNT (*) AS total_confirmed_cases,
 AVG (confirmed) AS average_confirmed_cases,
 VARIANCE (confirmed) AS variance_confirmed_cases,
 STDDEV (confirmed) AS stdev_confirmed_cases
 FROM corona_virus. `corona virus`;
- 
--- Q12. Check how corona virus spread out with respect to death case per month
+ ```
+-- Q12. Check how corona virus spreads out concerning death cases per month
 -- (E.g.: total confirmed cases, their average, variance & STDEV)
-
+```sql
 SELECT YEAR (date) AS year,
        MONTH (date) AS month,
        SUM (deaths) AS total_death_cases,
@@ -208,30 +216,32 @@ SELECT YEAR (date) AS year,
        STDDEV (deaths) AS stdev_death_cases
 FROM corona_virus. `corona virus`
 GROUP BY YEAR (date), MONTH (date);
- 
+ ```
 
 13. Check how corona virus spread out with respect to recovered case
 -- (E.g.: total confirmed cases, their average, variance & STDEV)
-
+```sql
 SELECT COUNT (*) AS total_recovered_cases,
 AVG (recovered) AS average_recovered_cases,
 VARIANCE (recovered) AS variance_recovered_cases,
 STDDEV (recovered) AS stdev_recovered_cases
 FROM corona_virus. `corona virus`
 WHERE recovered > 0;
- 
+ ```
 14. Find Country having highest number of the Confirmed case
-
+```sql
 SELECT `Country/Region`, `Province`
 FROM corona_virus. `corona virus`
 WHERE confirmed = (
     SELECT MAX (confirmed)
     FROM corona_virus. `corona virus`
 );
- 
+ ```
 --A check Query 
+```sql
 Select max (Confirmed) FROM corona_virus. `corona virus`
 WHERE `Country/Region`= 'Turkey';
+```
  
 15. Find Country having lowest number of the death case
 
