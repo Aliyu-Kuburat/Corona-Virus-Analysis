@@ -32,8 +32,11 @@ The objective was a guide to the data exploration. The most important thing I di
 
 Check the uploaded folder for detailed information on image extraction from MySQL
 
+
 SHOW TABLES;
-```SELECT * FROM corona_virus. `corona virus`;```
+```sql
+SELECT * FROM corona_virus. `corona virus`;
+```
 
 1.	Write a code to check NULL values
 SELECT * FROM corona_virus. `corona virus`
